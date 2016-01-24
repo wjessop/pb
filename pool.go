@@ -8,14 +8,18 @@ import (
 	"time"
 )
 
+func NewPool() (pool *Pool) {
+	return new(Pool)
+}
+
 // Create and start new pool with given bars
 // You need call pool.Stop() after work
 func StartPool(pbs ...*ProgressBar) (pool *Pool, err error) {
-	pool = new(Pool)
-	if err = pool.start(); err != nil {
+	pool = NewPool()
+	if err = pool.Start(); err != nil {
 		return
 	}
-	pool.add(pbs...)
+	pool.Add(pbs...)
 	return
 }
 
@@ -26,7 +30,7 @@ type Pool struct {
 	finishOnce  sync.Once
 }
 
-func (p *Pool) add(pbs ...*ProgressBar) {
+func (p *Pool) Add(pbs ...*ProgressBar) {
 	for _, bar := range pbs {
 		bar.ManualUpdate = true
 		bar.NotPrint = true
@@ -35,7 +39,7 @@ func (p *Pool) add(pbs ...*ProgressBar) {
 	}
 }
 
-func (p *Pool) start() (err error) {
+func (p *Pool) Start() (err error) {
 	p.RefreshRate = DefaultRefreshRate
 	quit, err := lockEcho()
 	if err != nil {
