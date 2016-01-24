@@ -9,7 +9,7 @@ import (
 )
 
 func Test_IncrementAddsOne(t *testing.T) {
-	count := 5000
+	count := int64(5000)
 	bar := New(count)
 	expected := 1
 	actual := bar.Increment()
@@ -20,7 +20,7 @@ func Test_IncrementAddsOne(t *testing.T) {
 }
 
 func Test_Width(t *testing.T) {
-	count := 5000
+	count := int64(5000)
 	bar := New(count)
 	width := 100
 	bar.SetWidth(100).Callback = func(out string) {
