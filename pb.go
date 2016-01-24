@@ -27,7 +27,7 @@ var (
 )
 
 // Create new progress bar object
-func New(total int) *ProgressBar {
+func New(total int64) *ProgressBar {
 	return New64(int64(total))
 }
 
@@ -51,7 +51,7 @@ func New64(total int64) *ProgressBar {
 }
 
 // Create new object and start
-func StartNew(total int) *ProgressBar {
+func StartNew(total int64) *ProgressBar {
 	return New(total).Start()
 }
 
